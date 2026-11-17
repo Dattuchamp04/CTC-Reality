@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!-- Generated from src/ by build.js. Edit the files in src/, then run: npm run build -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#16202c">
+<meta name="description" content="Your offer letter, corrected in red pen. See what reaches your bank each month and what a month on it looks like.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta property="og:title" content="CTC Reality">
+<meta property="og:description" content="Your offer letter, corrected in red pen.">
+<title>CTC Reality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@500;700&family=Courier+Prime:wght@400;700&family=Instrument+Sans:wght@400;500;600&family=Kalam:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Kannada:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Idea: two offer letters lying on a desk, corrected in red pen. Typed text is what the company says; handwriting is the truth. One world, one theme. */
+:root{
+  --desk:#16202c; --paper:#fbfbf7; --ink:#1a2333; --faint:#6b7588; --rule:#d9dde5; --pen:#d42a3c; --tick:#1a8a5c; --note:#ffe566;
+  --typed:"Courier Prime","Courier New",monospace; --ui:"Instrument Sans","Segoe UI",system-ui,sans-serif; --hand:"Kalam","Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  color-scheme:light;
+}
+:root[lang="hi"]{--typed:"Noto Sans Devanagari","Nirmala UI",sans-serif;--ui:"Noto Sans Devanagari","Nirmala UI",sans-serif}
+:root[lang="kn"]{--typed:"Noto Sans Kannada","Nirmala UI",sans-serif;--ui:"Noto Sans Kannada","Nirmala UI",sans-serif;--hand:"Baloo Tamma 2","Noto Sans Kannada",sans-serif}
+:root:not([lang="en"]) h2,:root:not([lang="en"]) .end span{letter-spacing:0;font-size:13px}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--desk);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.45;
+  background-image:radial-gradient(circle at 20% 0%,#223247 0,transparent 55%)}
+.wrap{max-width:1120px;margin:0 auto;padding:22px 16px 40px;display:flex;flex-direction:column;gap:20px}
+.mast{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;color:#e8edf5}
+.mast h1{font:700 22px var(--typed);letter-spacing:.5px;margin:0}
+.mast h1 s{text-decoration-color:var(--pen);text-decoration-thickness:3px;color:#93a0b5}
+.mast h1 em{font:700 26px var(--hand);color:#ff6b7a;margin-left:6px}
+.mast p{margin:0;color:#9fabbf;max-width:58ch;flex:1 1 300px}
+.langs{display:flex;gap:4px;margin-left:auto}
+.langs button{font:600 13px/1 "Instrument Sans","Noto Sans Devanagari","Noto Sans Kannada",sans-serif;color:#c9d3e3;background:none;border:1.5px solid #3a4a60;border-radius:999px;padding:8px 12px;cursor:pointer;min-height:36px}
+.langs button[aria-pressed="true"]{background:#e8edf5;color:var(--desk);border-color:#e8edf5}
+
+.sticky{align-self:flex-start;background:var(--note);color:#3a3200;padding:14px 18px 12px;max-width:640px;transform:rotate(-.8deg);box-shadow:0 10px 22px rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.5) inset;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.sticky strong{font:600 21px/1.3 var(--ui);flex:1 1 300px;text-wrap:balance}
+.btn{font:600 13px var(--ui);background:var(--ink);color:#fff;border:0;border-radius:6px;padding:9px 13px;cursor:pointer;min-height:38px}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.pen{background:var(--pen)}
+.link{font:600 13px var(--ui);color:var(--pen);background:none;border:0;border-bottom:1.5px solid currentColor;padding:2px 0;cursor:pointer}
+
+.desk{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:22px;align-items:start}
+.sheet{background:var(--paper);padding:26px 26px 22px;box-shadow:0 18px 40px rgba(0,0,0,.4);position:relative;display:flex;flex-direction:column;gap:14px;min-width:0}
+.sheet:nth-child(2){transform:rotate(.35deg)}
+.sheet.pick::after{content:attr(data-stamp);position:absolute;top:-17px;right:22px;font:700 17px var(--hand);color:var(--tick);border:2.5px solid var(--tick);border-radius:50%;padding:6px 14px 3px;transform:rotate(8deg);background:var(--paper)}
+.lh{display:flex;gap:10px;align-items:center;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.lh input{font:700 18px var(--typed);color:var(--ink);background:none;border:0;min-width:0;flex:1;padding:2px 0;text-transform:uppercase;letter-spacing:1px}
+.typed{font:400 14px/1.55 var(--typed);margin:0;color:var(--ink)}
+.claim{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;min-height:74px}
+.paper{display:flex;flex-direction:column;gap:6px}
+.onpaper{font:400 13px var(--ui);color:var(--faint)}
+.struck{align-self:flex-start;font:700 clamp(28px,6vw,38px)/1 "Courier Prime",monospace;position:relative;white-space:nowrap;color:var(--faint);font-variant-numeric:tabular-nums}
+.struck::after{content:"";position:absolute;left:-5%;right:-5%;top:46%;height:4px;background:var(--pen);border-radius:3px;transform:rotate(-3deg);transform-origin:left}
+.claim.ink .struck::after{animation:strike .5s .1s cubic-bezier(.6,0,.2,1) both}
+.real{font:500 14px/1.3 var(--ui);color:var(--pen);transform:rotate(-2deg)}
+.claim.ink .real{animation:write .4s .5s both}
+.real b{display:block;font-family:Kalam,var(--hand);font-size:clamp(34px,7vw,46px);line-height:1;font-variant-numeric:tabular-nums}
+@keyframes strike{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes write{from{opacity:0;transform:rotate(-2deg) translateY(4px)}to{opacity:1;transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){.claim.ink .struck::after,.claim.ink .real{animation:none}}
+.fill{font:400 14.5px/2 var(--ui);margin:0}
+.fill input,.fill select,.own input,.own select{font:600 14.5px var(--ui);color:var(--pen);background:none;border:0;border-bottom:1.5px dashed var(--faint);padding:1px 2px;border-radius:0;max-width:100%}
+.fill input{width:5.2ch;text-align:center}
+.fill select{cursor:pointer}
+:focus-visible{outline:2.5px solid #2f6fe0;outline-offset:2px}
+h2{font:700 12px var(--ui);letter-spacing:1.6px;text-transform:uppercase;color:var(--faint);margin:6px 0 -6px}
+table{width:100%;border-collapse:collapse;font:400 14px var(--ui);font-variant-numeric:tabular-nums}
+td{padding:4px 0;border-bottom:1px solid var(--rule);vertical-align:baseline}
+td.n{text-align:right;white-space:nowrap;padding-left:8px}
+td.m{font:500 12.5px/1.25 var(--ui);color:var(--pen);padding-left:10px;width:38%}
+tr.gone td:first-child,tr.gone td.n{color:var(--faint)}
+tr.tot td{border-bottom:0;border-top:2px solid var(--ink);font-weight:700;padding-top:6px}
+tr.bank td{border-bottom:0;font-weight:700;font-size:16px;padding-top:7px}
+tr.bank td.n{color:var(--pen)}
+.margin{font:500 14.5px/1.4 var(--ui);color:var(--pen);margin:0}
+.flags{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.flags li{font:500 14px/1.4 var(--ui);padding-left:26px;position:relative}
+.flags li::before{position:absolute;left:2px;top:0;font:700 14px var(--ui)}
+.flags .bad{color:var(--pen)}.flags .bad::before{content:"✗"}
+.flags .warn{color:#a05a00}.flags .warn::before{content:"!"}
+.flags .ok{color:var(--tick)}.flags .ok::before{content:"✓"}
+.boxes{display:grid;grid-template-columns:repeat(15,1fr);gap:4px}
+.boxes i{aspect-ratio:1;border-radius:2px;display:block}
+.boxes i.owe{background:repeating-linear-gradient(45deg,var(--pen) 0 3px,transparent 3px 6px);box-shadow:inset 0 0 0 1.5px var(--pen)}
+.key{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:3px 14px;font:400 13px var(--ui);font-variant-numeric:tabular-nums}
+.key li{display:flex;gap:7px;align-items:center}
+.key i{width:11px;height:11px;border-radius:2px;flex:none}
+.key b{margin-left:auto;font-weight:400}
+.end{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;border-top:2px solid var(--ink);padding-top:10px}
+.end span{font:700 12px var(--ui);letter-spacing:1.6px;text-transform:uppercase;color:var(--faint)}
+.end b{font:700 34px/1 Kalam,var(--hand);margin-left:auto;font-variant-numeric:tabular-nums}
+.end b.pos{color:var(--tick)}.end b.neg{color:var(--pen)}
+.end small{flex-basis:100%;font:500 14px var(--ui);color:var(--pen)}
+.foot{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+details summary{cursor:pointer;font:600 13px var(--ui);color:var(--faint)}
+.own{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:10px}
+.own label{display:flex;flex-direction:column;gap:2px;font:600 11px var(--ui);color:var(--faint)}
+.own input,.own select{width:100%}
+.how{color:#9fabbf;font-size:13px;max-width:78ch;margin:0}
+.how b{color:#e8edf5}
+
+@media (max-width:520px){
+  .sheet{padding:22px 18px 18px}.sheet:nth-child(2){transform:none}
+  tr{display:grid;grid-template-columns:1fr auto;border-bottom:1px solid var(--rule)}td{border-bottom:0}
+  td.m{grid-column:1/-1;width:auto;padding:0 0 5px}td.m:empty{display:none}
+  tr.tot{border-bottom:0;border-top:2px solid var(--ink)}tr.tot td{border-top:0}tr.bank{border-bottom:0}
+}
+.priv{font:600 13px var(--ui)!important;color:var(--tick)!important;border:1.5px solid var(--tick);border-radius:6px;padding:7px 10px;align-self:flex-start}
+.fmt{display:flex;flex-wrap:wrap;gap:6px}
+.fmt button{font:600 13px var(--ui);background:none;border:1.5px solid var(--rule);color:var(--ink);border-radius:999px;padding:8px 12px;cursor:pointer;min-height:38px}
+.fmt button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tabs{display:none}
+@media (max-width:760px){
+  .tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;position:sticky;top:0;z-index:3;background:var(--desk);padding:8px 0;margin:-8px 0 -10px}
+  .tabs button{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:0 6px;text-align:left;font:600 13px var(--ui);color:#c9d3e3;background:#1f2b3b;border:1.5px solid #34465e;border-radius:10px;padding:8px 10px;cursor:pointer;min-height:52px}
+  .tabs button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tabs button b{font:700 17px Kalam,var(--hand);grid-row:span 2;align-self:center}
+  .tabs button small{font:400 11px var(--ui);color:#8fa0b8}
+  .tabs button b.pos{color:#4fd1a0}.tabs button b.neg{color:#ff6b7a}
+  .tabs button[aria-selected="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .tabs button[aria-selected="true"] b.pos{color:var(--tick)}.tabs button[aria-selected="true"] b.neg{color:var(--pen)}.tabs button[aria-selected="true"] small{color:var(--faint)}
+  .desk[data-show="0"] .sheet:nth-child(2),.desk[data-show="1"] .sheet:nth-child(1){display:none}
+  .sheet.pick::after{top:-14px}
+}
+.veil{position:fixed;inset:0;background:rgba(10,15,22,.72);display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;overflow:auto;z-index:5}
+.veil[hidden]{display:none}
+.modal{background:var(--paper);width:100%;max-width:560px;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.modal h3{font:700 18px var(--typed);margin:0}
+.modal p{margin:0;color:var(--faint);font-size:14px}
+.modal textarea{font:400 13px/1.5 var(--typed);width:100%;min-height:190px;border:1.5px solid var(--rule);background:#fff;padding:10px;color:var(--ink);resize:vertical}
+.modal .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.modal .err{color:var(--pen);font:500 14px var(--ui)}
+.modal img{width:100%;height:auto;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+input[type=file]{font:500 13px var(--ui);max-width:100%}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast"><h1><s>CTC</s><em>Reality</em></h1><p id="tag"></p><div class="langs" role="group" aria-label="Language"><button data-lang="en">English</button><button data-lang="hi" lang="hi">हिन्दी</button><button data-lang="kn" lang="kn">ಕನ್ನಡ</button></div></header>
+  <div class="sticky"><strong id="verdict"></strong></div>
+  <div class="tabs" id="tabs" role="tablist" aria-label="Offers"></div>
+  <main class="desk" id="desk"></main>
+  <p class="how" id="how"></p>
+</div>
+
+<div class="veil" id="reader" hidden><div class="modal" role="dialog" aria-labelledby="rd-t">
+  <h3 id="rd-t">Read my offer letter</h3>
+  <p class="priv" id="priv"></p>
+  <p id="rd-i"></p>
+  <textarea id="rd-text" placeholder="Basic Salary            4,80,000&#10;House Rent Allowance    2,40,000&#10;..."></textarea>
+  <div class="row"><input type="file" id="rd-file" accept=".pdf,.txt,application/pdf,text/plain,image/*"></div>
+  <div class="err" id="rd-err"></div>
+  <div class="row"><button class="btn pen" id="rd-go">Read it</button><button class="btn ghost" id="rd-sample">Try a sample letter</button><button class="btn ghost" id="rd-x">Cancel</button></div>
+</div></div>
+<div class="veil" id="share" hidden><div class="modal" role="dialog" aria-labelledby="sh-t">
+  <h3 id="sh-t">Share card</h3>
+  <div class="fmt" role="group" aria-label="Card size"><button data-f="45" id="f45"></button><button data-f="169" id="f169"></button></div>
+  <img id="sh-img" alt="Share card showing the offer and what it really pays">
+  <p id="sh-h"></p>
+  <div class="row"><button class="btn" id="sh-copy">Copy as text</button><button class="btn ghost" id="sh-x">Close</button></div>
+</div></div>
+
+<script>
+/*__ENGINE__*/
+/*__I18N__*/
+</script>
+<script>
+/*__APP__*/
+</script>
+<script>
+// Offline support, only on the real site (HTTPS).
+if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
+</script>
+<!-- Vercel Web Analytics: counts page views without cookies or personal data. Does nothing until enabled in the Vercel dashboard. -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

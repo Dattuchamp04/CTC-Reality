@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Generated from src/ by build.js. Edit the files in src/, then run: npm run build -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -167,8 +168,9 @@ input[type=file]{font:500 13px var(--ui);max-width:100%}
 </div></div>
 
 <script>
-// CTC Reality engine: tax, salary structure, living costs, offer-letter reader. Pure functions, no DOM.
-// Tax: FY 2026-27, new regime.
+// CTC Reality engine: tax, salary structure, living costs, offer-letter reader.
+// Pure functions with no DOM access, so the same file runs in the browser and in Node tests.
+// Tax rules: India, FY 2026-27, new regime (Section 115BAC).
 const SLABS = [[400000, 0], [800000, .05], [1200000, .10], [1600000, .15], [2000000, .20], [2400000, .25], [Infinity, .30]];
 const STD_DED = 75000, REBATE_LIMIT = 1200000;
 function incomeTax(gross) {
@@ -394,6 +396,8 @@ if (typeof module !== 'undefined') module.exports = { T };
 
 </script>
 <script>
+// CTC Reality UI: renders the two offer sheets, the letter reader (PDF.js, Tesseract.js), languages and share cards.
+// Depends on engine.js and i18n.js, which build.js inlines before this file.
 (function(){
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -576,6 +580,12 @@ window.__ctc={get S(){return S},get R(){return R},get lang(){return lang}};
 })();
 
 </script>
-<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
+<script>
+// Offline support, only on the real site (HTTPS).
+if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}
+</script>
+<!-- Vercel Web Analytics: counts page views without cookies or personal data. Does nothing until enabled in the Vercel dashboard. -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

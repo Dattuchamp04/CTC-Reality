@@ -1,0 +1,17 @@
+{
+  "name": "ctc-reality",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Your offer letter, corrected in red pen. India-first salary take-home and offer-letter analyser that runs entirely in the browser.",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node --test",
+    "e2e": "playwright test",
+    "check": "node build.js && git diff --exit-code index.html"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.48.2"
+  },
+  "engines": { "node": ">=20" }
+}
