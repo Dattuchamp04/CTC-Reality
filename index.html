@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#16202c">
+<meta name="description" content="Your offer letter, corrected in red pen. See what reaches your bank each month and what a month on it looks like.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta property="og:title" content="CTC Reality">
+<meta property="og:description" content="Your offer letter, corrected in red pen.">
+<title>CTC Reality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@500;700&family=Courier+Prime:wght@400;700&family=Instrument+Sans:wght@400;500;600&family=Kalam:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Kannada:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Idea: two offer letters lying on a desk, corrected in red pen. Typed text is what the company says; handwriting is the truth. One world, one theme. */
+:root{
+  --desk:#16202c; --paper:#fbfbf7; --ink:#1a2333; --faint:#6b7588; --rule:#d9dde5; --pen:#d42a3c; --tick:#1a8a5c; --note:#ffe566;
+  --typed:"Courier Prime","Courier New",monospace; --ui:"Instrument Sans","Segoe UI",system-ui,sans-serif; --hand:"Kalam","Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  color-scheme:light;
+}
+:root[lang="hi"]{--typed:"Noto Sans Devanagari","Nirmala UI",sans-serif;--ui:"Noto Sans Devanagari","Nirmala UI",sans-serif}
+:root[lang="kn"]{--typed:"Noto Sans Kannada","Nirmala UI",sans-serif;--ui:"Noto Sans Kannada","Nirmala UI",sans-serif;--hand:"Baloo Tamma 2","Noto Sans Kannada",sans-serif}
+:root:not([lang="en"]) h2,:root:not([lang="en"]) .end span{letter-spacing:0;font-size:13px}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--desk);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.45;
+  background-image:radial-gradient(circle at 20% 0%,#223247 0,transparent 55%)}
+.wrap{max-width:1120px;margin:0 auto;padding:22px 16px 40px;display:flex;flex-direction:column;gap:20px}
+.mast{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;color:#e8edf5}
+.mast h1{font:700 22px var(--typed);letter-spacing:.5px;margin:0}
+.mast h1 s{text-decoration-color:var(--pen);text-decoration-thickness:3px;color:#93a0b5}
+.mast h1 em{font:700 26px var(--hand);color:#ff6b7a;margin-left:6px}
+.mast p{margin:0;color:#9fabbf;max-width:58ch;flex:1 1 300px}
+.langs{display:flex;gap:4px;margin-left:auto}
+.langs button{font:600 13px/1 "Instrument Sans","Noto Sans Devanagari","Noto Sans Kannada",sans-serif;color:#c9d3e3;background:none;border:1.5px solid #3a4a60;border-radius:999px;padding:8px 12px;cursor:pointer;min-height:36px}
+.langs button[aria-pressed="true"]{background:#e8edf5;color:var(--desk);border-color:#e8edf5}
+
+.sticky{align-self:flex-start;background:var(--note);color:#3a3200;padding:14px 18px 12px;max-width:640px;transform:rotate(-.8deg);box-shadow:0 10px 22px rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.5) inset;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.sticky strong{font:600 21px/1.3 var(--ui);flex:1 1 300px;text-wrap:balance}
+.btn{font:600 13px var(--ui);background:var(--ink);color:#fff;border:0;border-radius:6px;padding:9px 13px;cursor:pointer;min-height:38px}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.pen{background:var(--pen)}
+.link{font:600 13px var(--ui);color:var(--pen);background:none;border:0;border-bottom:1.5px solid currentColor;padding:2px 0;cursor:pointer}
+
+.desk{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:22px;align-items:start}
+.sheet{background:var(--paper);padding:26px 26px 22px;box-shadow:0 18px 40px rgba(0,0,0,.4);position:relative;display:flex;flex-direction:column;gap:14px;min-width:0}
+.sheet:nth-child(2){transform:rotate(.35deg)}
+.sheet.pick::after{content:attr(data-stamp);position:absolute;top:-17px;right:22px;font:700 17px var(--hand);color:var(--tick);border:2.5px solid var(--tick);border-radius:50%;padding:6px 14px 3px;transform:rotate(8deg);background:var(--paper)}
+.lh{display:flex;gap:10px;align-items:center;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.lh input{font:700 18px var(--typed);color:var(--ink);background:none;border:0;min-width:0;flex:1;padding:2px 0;text-transform:uppercase;letter-spacing:1px}
+.typed{font:400 14px/1.55 var(--typed);margin:0;color:var(--ink)}
+.claim{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;min-height:74px}
+.paper{display:flex;flex-direction:column;gap:6px}
+.onpaper{font:400 13px var(--ui);color:var(--faint)}
+.struck{align-self:flex-start;font:700 clamp(28px,6vw,38px)/1 "Courier Prime",monospace;position:relative;white-space:nowrap;color:var(--faint);font-variant-numeric:tabular-nums}
+.struck::after{content:"";position:absolute;left:-5%;right:-5%;top:46%;height:4px;background:var(--pen);border-radius:3px;transform:rotate(-3deg);transform-origin:left}
+.claim.ink .struck::after{animation:strike .5s .1s cubic-bezier(.6,0,.2,1) both}
+.real{font:500 14px/1.3 var(--ui);color:var(--pen);transform:rotate(-2deg)}
+.claim.ink .real{animation:write .4s .5s both}
+.real b{display:block;font-family:Kalam,var(--hand);font-size:clamp(34px,7vw,46px);line-height:1;font-variant-numeric:tabular-nums}
+@keyframes strike{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes write{from{opacity:0;transform:rotate(-2deg) translateY(4px)}to{opacity:1;transform:rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){.claim.ink .struck::after,.claim.ink .real{animation:none}}
+.fill{font:400 14.5px/2 var(--ui);margin:0}
+.fill input,.fill select,.own input,.own select{font:600 14.5px var(--ui);color:var(--pen);background:none;border:0;border-bottom:1.5px dashed var(--faint);padding:1px 2px;border-radius:0;max-width:100%}
+.fill input{width:5.2ch;text-align:center}
+.fill select{cursor:pointer}
+:focus-visible{outline:2.5px solid #2f6fe0;outline-offset:2px}
+h2{font:700 12px var(--ui);letter-spacing:1.6px;text-transform:uppercase;color:var(--faint);margin:6px 0 -6px}
+table{width:100%;border-collapse:collapse;font:400 14px var(--ui);font-variant-numeric:tabular-nums}
+td{padding:4px 0;border-bottom:1px solid var(--rule);vertical-align:baseline}
+td.n{text-align:right;white-space:nowrap;padding-left:8px}
+td.m{font:500 12.5px/1.25 var(--ui);color:var(--pen);padding-left:10px;width:38%}
+tr.gone td:first-child,tr.gone td.n{color:var(--faint)}
+tr.tot td{border-bottom:0;border-top:2px solid var(--ink);font-weight:700;padding-top:6px}
+tr.bank td{border-bottom:0;font-weight:700;font-size:16px;padding-top:7px}
+tr.bank td.n{color:var(--pen)}
+.margin{font:500 14.5px/1.4 var(--ui);color:var(--pen);margin:0}
+.flags{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.flags li{font:500 14px/1.4 var(--ui);padding-left:26px;position:relative}
+.flags li::before{position:absolute;left:2px;top:0;font:700 14px var(--ui)}
+.flags .bad{color:var(--pen)}.flags .bad::before{content:"✗"}
+.flags .warn{color:#a05a00}.flags .warn::before{content:"!"}
+.flags .ok{color:var(--tick)}.flags .ok::before{content:"✓"}
+.boxes{display:grid;grid-template-columns:repeat(15,1fr);gap:4px}
+.boxes i{aspect-ratio:1;border-radius:2px;display:block}
+.boxes i.owe{background:repeating-linear-gradient(45deg,var(--pen) 0 3px,transparent 3px 6px);box-shadow:inset 0 0 0 1.5px var(--pen)}
+.key{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:3px 14px;font:400 13px var(--ui);font-variant-numeric:tabular-nums}
+.key li{display:flex;gap:7px;align-items:center}
+.key i{width:11px;height:11px;border-radius:2px;flex:none}
+.key b{margin-left:auto;font-weight:400}
+.end{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;border-top:2px solid var(--ink);padding-top:10px}
+.end span{font:700 12px var(--ui);letter-spacing:1.6px;text-transform:uppercase;color:var(--faint)}
+.end b{font:700 34px/1 Kalam,var(--hand);margin-left:auto;font-variant-numeric:tabular-nums}
+.end b.pos{color:var(--tick)}.end b.neg{color:var(--pen)}
+.end small{flex-basis:100%;font:500 14px var(--ui);color:var(--pen)}
+.foot{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+details summary{cursor:pointer;font:600 13px var(--ui);color:var(--faint)}
+.own{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:10px}
+.own label{display:flex;flex-direction:column;gap:2px;font:600 11px var(--ui);color:var(--faint)}
+.own input,.own select{width:100%}
+.how{color:#9fabbf;font-size:13px;max-width:78ch;margin:0}
+.how b{color:#e8edf5}
+
+@media (max-width:520px){
+  .sheet{padding:22px 18px 18px}.sheet:nth-child(2){transform:none}
+  tr{display:grid;grid-template-columns:1fr auto;border-bottom:1px solid var(--rule)}td{border-bottom:0}
+  td.m{grid-column:1/-1;width:auto;padding:0 0 5px}td.m:empty{display:none}
+  tr.tot{border-bottom:0;border-top:2px solid var(--ink)}tr.tot td{border-top:0}tr.bank{border-bottom:0}
+}
+.priv{font:600 13px var(--ui)!important;color:var(--tick)!important;border:1.5px solid var(--tick);border-radius:6px;padding:7px 10px;align-self:flex-start}
+.fmt{display:flex;flex-wrap:wrap;gap:6px}
+.fmt button{font:600 13px var(--ui);background:none;border:1.5px solid var(--rule);color:var(--ink);border-radius:999px;padding:8px 12px;cursor:pointer;min-height:38px}
+.fmt button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tabs{display:none}
+@media (max-width:760px){
+  .tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;position:sticky;top:0;z-index:3;background:var(--desk);padding:8px 0;margin:-8px 0 -10px}
+  .tabs button{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:0 6px;text-align:left;font:600 13px var(--ui);color:#c9d3e3;background:#1f2b3b;border:1.5px solid #34465e;border-radius:10px;padding:8px 10px;cursor:pointer;min-height:52px}
+  .tabs button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .tabs button b{font:700 17px Kalam,var(--hand);grid-row:span 2;align-self:center}
+  .tabs button small{font:400 11px var(--ui);color:#8fa0b8}
+  .tabs button b.pos{color:#4fd1a0}.tabs button b.neg{color:#ff6b7a}
+  .tabs button[aria-selected="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .tabs button[aria-selected="true"] b.pos{color:var(--tick)}.tabs button[aria-selected="true"] b.neg{color:var(--pen)}.tabs button[aria-selected="true"] small{color:var(--faint)}
+  .desk[data-show="0"] .sheet:nth-child(2),.desk[data-show="1"] .sheet:nth-child(1){display:none}
+  .sheet.pick::after{top:-14px}
+}
+.veil{position:fixed;inset:0;background:rgba(10,15,22,.72);display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;overflow:auto;z-index:5}
+.veil[hidden]{display:none}
+.modal{background:var(--paper);width:100%;max-width:560px;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.modal h3{font:700 18px var(--typed);margin:0}
+.modal p{margin:0;color:var(--faint);font-size:14px}
+.modal textarea{font:400 13px/1.5 var(--typed);width:100%;min-height:190px;border:1.5px solid var(--rule);background:#fff;padding:10px;color:var(--ink);resize:vertical}
+.modal .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.modal .err{color:var(--pen);font:500 14px var(--ui)}
+.modal img{width:100%;height:auto;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+input[type=file]{font:500 13px var(--ui);max-width:100%}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast"><h1><s>CTC</s><em>Reality</em></h1><p id="tag"></p><div class="langs" role="group" aria-label="Language"><button data-lang="en">English</button><button data-lang="hi" lang="hi">हिन्दी</button><button data-lang="kn" lang="kn">ಕನ್ನಡ</button></div></header>
+  <div class="sticky"><strong id="verdict"></strong></div>
+  <div class="tabs" id="tabs" role="tablist" aria-label="Offers"></div>
+  <main class="desk" id="desk"></main>
+  <p class="how" id="how"></p>
+</div>
+
+<div class="veil" id="reader" hidden><div class="modal" role="dialog" aria-labelledby="rd-t">
+  <h3 id="rd-t">Read my offer letter</h3>
+  <p class="priv" id="priv"></p>
+  <p id="rd-i"></p>
+  <textarea id="rd-text" placeholder="Basic Salary            4,80,000&#10;House Rent Allowance    2,40,000&#10;..."></textarea>
+  <div class="row"><input type="file" id="rd-file" accept=".pdf,.txt,application/pdf,text/plain,image/*"></div>
+  <div class="err" id="rd-err"></div>
+  <div class="row"><button class="btn pen" id="rd-go">Read it</button><button class="btn ghost" id="rd-sample">Try a sample letter</button><button class="btn ghost" id="rd-x">Cancel</button></div>
+</div></div>
+<div class="veil" id="share" hidden><div class="modal" role="dialog" aria-labelledby="sh-t">
+  <h3 id="sh-t">Share card</h3>
+  <div class="fmt" role="group" aria-label="Card size"><button data-f="45" id="f45"></button><button data-f="169" id="f169"></button></div>
+  <img id="sh-img" alt="Share card showing the offer and what it really pays">
+  <p id="sh-h"></p>
+  <div class="row"><button class="btn" id="sh-copy">Copy as text</button><button class="btn ghost" id="sh-x">Close</button></div>
+</div></div>
+
+<script>
+// CTC Reality engine: tax, salary structure, living costs, offer-letter reader. Pure functions, no DOM.
+// Tax: FY 2026-27, new regime.
+const SLABS = [[400000, 0], [800000, .05], [1200000, .10], [1600000, .15], [2000000, .20], [2400000, .25], [Infinity, .30]];
+const STD_DED = 75000, REBATE_LIMIT = 1200000;
+function incomeTax(gross) {
+  const ti = Math.max(0, gross - STD_DED); let tax = 0, prev = 0;
+  for (const [lim, r] of SLABS) { if (ti > prev) tax += (Math.min(ti, lim) - prev) * r; prev = lim; }
+  if (ti <= REBATE_LIMIT) tax = 0; else tax = Math.min(tax, ti - REBATE_LIMIT);
+  return Math.round(withSurcharge(ti, tax) * 1.04);
+}
+function slabTax(ti) { let tax = 0, prev = 0; for (const [lim, r] of SLABS) { if (ti > prev) tax += (Math.min(ti, lim) - prev) * r; prev = lim; } return tax; }
+// Surcharge with marginal relief: crossing a threshold can't cost more than the income above it. New regime caps at 25%.
+function withSurcharge(ti, tax) {
+  const steps = [[20000000, .25], [10000000, .15], [5000000, .10]];
+  for (let i = 0; i < steps.length; i++) {
+    const [th, rate] = steps[i]; if (ti <= th) continue;
+    const below = i + 1 < steps.length ? steps[i + 1][1] : 0;
+    return Math.min(tax * (1 + rate), slabTax(th) * (1 + below) + (ti - th));
+  }
+  return tax;
+}
+// True when the ₹12 lakh rebate's marginal relief is what sets the tax.
+function inRelief(gross) { const ti = gross - STD_DED; return ti > REBATE_LIMIT && slabTax(ti) > ti - REBATE_LIMIT;
+}
+// Monthly living costs for one person. Starting estimates, meant to be overwritten.
+const CITIES = {
+  'Bengaluru': { rent: [11000, 17000, 28000], k: 1, pt: 200 }, 'Mumbai': { rent: [14000, 24000, 40000], k: 1.05, pt: 200 },
+  'Gurugram': { rent: [11000, 17000, 28000], k: 1, pt: 0 }, 'Hyderabad': { rent: [9000, 14000, 22000], k: .95, pt: 200 },
+  'Pune': { rent: [9000, 14000, 22000], k: .95, pt: 200 }, 'Chennai': { rent: [9000, 13000, 20000], k: .92, pt: 200 },
+  'Kolkata': { rent: [7000, 10000, 15000], k: .85, pt: 200 }, 'Ahmedabad': { rent: [7000, 10000, 15000], k: .85, pt: 200 },
+  'Kochi': { rent: [7000, 10000, 14000], k: .85, pt: 200 }, 'Jaipur': { rent: [6500, 9000, 13000], k: .82, pt: 200 },
+  'Indore': { rent: [6000, 8000, 12000], k: .8, pt: 200 }
+};
+const FOOD = [5500, 9000, 14000], RIDE = [2000, 3200, 9000];
+const PARTS = ['basic', 'hra', 'special', 'epfEmployer', 'gratuity', 'variable', 'oneTime', 'other'];
+
+function derive(o) {
+  if (o.mode === 'letter' && o.comp) return { ...o.comp };
+  const ctc = o.lpa * 100000, variable = ctc * o.varPct / 100, fixed = ctc - variable, basic = fixed * o.basicPct / 100;
+  const epfEmployer = o.pf === 'none' ? 0 : o.pf === 'cap' ? Math.min(basic * .12, 21600) : basic * .12, gratuity = basic * .0481;
+  let hra = basic * .4, special = fixed - basic - hra - epfEmployer - gratuity; if (special < 0) { hra = Math.max(0, hra + special); special = 0; }
+  return { basic, hra, special, epfEmployer, gratuity, variable, oneTime: 0, other: 0, ctc };
+}
+function compute(o) {
+  const c = derive(o), sum = PARTS.reduce((s, k) => s + (c[k] || 0), 0), ctc = c.ctc || sum;
+  const gross = c.basic + c.hra + c.special, epf = c.epfEmployer, city = CITIES[o.city] || CITIES.Bengaluru, pt = city.pt * 12;
+  const taxFixed = incomeTax(gross), taxVar = incomeTax(gross + c.variable) - taxFixed, taxOnce = incomeTax(gross + c.variable + c.oneTime) - taxFixed - taxVar;
+  const inHand = (gross - epf - pt - taxFixed) / 12;
+  const rent = o.rent != null ? o.rent : city.rent[o.home], food = Math.round(FOOD[o.food] * city.k / 100) * 100, ride = Math.round(RIDE[o.ride] * city.k / 100) * 100;
+  const spendParts = [['Rent', rent], ['Food', food], ['Travel', ride], ['Bills, phone, fun', o.other], ['EMI + sent home', o.emi]].filter(p => p[1] > 0);
+  const spend = spendParts.reduce((s, p) => s + p[1], 0), left = inHand - spend;
+  return { c, ctc, sum, gap: ctc - sum, gross, epf, pt, taxFixed, inHand, variableNet: c.variable - taxVar, oneTimeNet: c.oneTime - taxOnce,
+    rent, food, ride, spendParts, spend, left, saveRate: inHand > 0 ? left / inHand : 0, runOutDay: left < 0 ? Math.max(1, Math.floor(30 * inHand / spend)) : null,
+    neverMonthly: ctc - gross };
+}
+// Split a month into 30 boxes by where the money goes. Returns [{label, n}], plus borrowed boxes when short.
+function monthBoxes(r) {
+  const base = r.left >= 0 ? r.inHand : r.spend, items = r.spendParts.map(p => [p[0], p[1]]); if (r.left > 0) items.push(['Left over', r.left]);
+  const raw = items.map(p => 30 * p[1] / base), n = raw.map(Math.floor); let rest = 30 - n.reduce((a, b) => a + b, 0);
+  raw.map((v, i) => [v - n[i], i]).sort((a, b) => b[0] - a[0]).forEach(([, i]) => { if (rest > 0) { n[i]++; rest--; } });
+  return { boxes: items.map((p, i) => ({ label: p[0], amount: p[1], n: n[i] })), funded: r.left >= 0 ? 30 : r.runOutDay };
+}
+
+// ---------- offer letter reader ----------
+const RULES = [
+  ['skip', /employee'?s?\s+(contribution|share)|deduction|net\s+(pay|salary|take)|take[\s-]?home|in[\s-]?hand/],
+  ['ctc', /cost\s+to\s+(the\s+)?company|total\s+(annual\s+)?(ctc|compensation|cost|package)|annual\s+ctc|\bctc\b|total\s+rewards?/],
+  ['skip', /gross|sub[\s-]?total|total|fixed\s+(pay|compensation|salary|ctc)/],
+  ['oneTime', /joining|sign[\s-]?on|relocation|one[\s-]?time|retention/],
+  ['variable', /variable|performance|incentive|annual\s+bonus|target\s+bonus|bonus/],
+  ['gratuity', /gratuity/],
+  ['epfEmployer', /provident|\bepf\b|\bpf\b/],
+  ['other', /insurance|mediclaim|medical\s+cover|\bnps\b|superannuation|esop|\brsu|stock|meal\s+(card|coupon|voucher)|food\s+coupon|\besi\b/],
+  ['basic', /basic/],
+  ['hra', /house\s+rent|\bhra\b/],
+  ['special', /allowance|special|\blta\b|leave\s+travel|conveyance|flexi|telephone|bouquet|city\s+compensatory|statutory/]
+];
+function nums(line) {
+  const out = []; let m;
+  const lakh = /(\d+(?:\.\d+)?)\s*(lpa|lakhs?|lacs?)\b/gi; while ((m = lakh.exec(line))) out.push(parseFloat(m[1]) * 100000);
+  const dated = /\b(fy|year|dated?|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b|\d[\/-]\d/i.test(line);
+  const re = /(\d{1,3}(?:,\d{2,3})+|\d{4,})(?:\.\d+)?/g;
+  while ((m = re.exec(line))) { const v = parseFloat(m[1].replace(/,/g, '')); if (dated && !m[1].includes(',') && v >= 1900 && v <= 2100) continue; out.push(v); }
+  return out;
+}
+// Fix what phone OCR typically gets wrong in Indian amounts: 4.80.000 for 4,80,000, letter O for zero.
+function cleanOcr(text) {
+  return text.split(/\r?\n/).map(l => l
+    .replace(/([\d,])[oO](?=[\d,.]|\b)/g, '$10').replace(/([\d,])[oO](?=[\d,.]|\b)/g, '$10')
+    .replace(/\b\d{1,3}(?:[.,]\d{2})*[.,]\d{3}\b(?![.,]\d)/g, m => m.replace(/\./g, ','))
+    .replace(/[|]/g, ' ')).join('\n');
+}
+function parseLetter(text) {
+  const comp = { basic: 0, hra: 0, special: 0, epfEmployer: 0, gratuity: 0, variable: 0, oneTime: 0, other: 0, ctc: 0 };
+  const found = [], singles = []; let ctcSeen = 0;
+  for (const raw of text.split(/\r?\n/)) {
+    const line = raw.trim(), low = line.toLowerCase(), v = nums(line); if (!v.length || !/[a-z]/i.test(line)) continue;
+    const rule = RULES.find(r => r[1].test(low)); if (!rule || rule[0] === 'skip') continue;
+    const max = Math.max(...v), min = Math.min(...v);
+    if (rule[0] === 'ctc') { ctcSeen = Math.max(ctcSeen, max); continue; }
+    const paired = v.length >= 2 && max / min > 11.5 && max / min < 12.5, e = { bucket: rule[0], label: line.replace(/[\s:.\-–|₹]*(rs\.?|inr)?[\s:.\-–|₹]*\d[\d,.\s|₹/-]*$/i, '').trim().slice(0, 48), value: max, paired };
+    found.push(e); if (!paired && rule[0] !== 'oneTime') singles.push(e);
+  }
+  // Decide whether unpaired figures are monthly or yearly.
+  const pairedSum = found.filter(e => e.paired || e.bucket === 'oneTime').reduce((s, e) => s + e.value, 0), singleSum = singles.reduce((s, e) => s + e.value, 0);
+  let k = 1;
+  if (singles.length) {
+    if (ctcSeen) k = Math.abs(pairedSum + 12 * singleSum - ctcSeen) < Math.abs(pairedSum + singleSum - ctcSeen) ? 12 : 1;
+    else k = /per\s+month|monthly|\bp\.?\s?m\b/i.test(text) && Math.max(...singles.map(e => e.value)) < 150000 ? 12 : 1;
+  }
+  for (const e of found) { e.annual = e.paired || e.bucket === 'oneTime' ? e.value : e.value * k; comp[e.bucket] += e.annual; }
+  const sum = PARTS.reduce((s, p) => s + comp[p], 0); comp.ctc = ctcSeen && ctcSeen >= sum * .6 && ctcSeen <= sum * 2 ? ctcSeen : sum;
+  // Clauses worth a second look. Flags carry a code and values; the page words them in the reader's language.
+  const flags = [], t = text.replace(/\s+/g, ' '); let m;
+  const span = (n, u) => ({ n: +n, u: /day/i.test(u) ? 'day' : /month/i.test(u) ? 'month' : 'year' });
+  if (comp.oneTime && (m = /(claw\s?back|recover|repay|refund|return).{0,120}/i.exec(t))) { const mo = /(\d+)\s*(months?|years?)/i.exec(m[0]); flags.push({ level: 'bad', code: mo ? 'claw' : 'claw0', p: mo ? span(mo[1], mo[2]) : null }); }
+  else if (comp.oneTime) flags.push({ level: 'warn', code: 'once' });
+  if ((m = /notice\s+period[^.]{0,80}?(\d+)\s*(days?|months?)/i.exec(t))) { const d = /month/i.test(m[2]) ? +m[1] * 30 : +m[1]; flags.push({ level: d >= 60 ? 'warn' : 'ok', code: d >= 60 ? 'noticelong' : 'notice', p: span(m[1], m[2]) }); }
+  if (/service\s+(agreement|bond)|\bbond\b|liquidated\s+damages|training\s+cost/i.test(t)) { const amt = nums((/(service\s+(agreement|bond)|\bbond\b|liquidated\s+damages|training\s+cost).{0,160}/i.exec(t) || [''])[0]); flags.push({ level: 'bad', code: amt.length ? 'bond' : 'bond0', x: amt.length ? Math.max(...amt) : 0 }); }
+  if (comp.ctc && comp.variable / comp.ctc > .15) flags.push({ level: 'warn', code: 'var', pct: Math.round(100 * comp.variable / comp.ctc) });
+  if (comp.other) flags.push({ level: 'warn', code: 'ben', x: Math.round(comp.other) });
+  if (comp.ctc - sum > comp.ctc * .02) flags.push({ level: 'warn', code: 'mis', x: Math.round(sum), y: Math.round(comp.ctc) });
+  if ((m = /probation[^.]{0,60}?(\d+)\s*(months?|days?)/i.exec(t))) flags.push({ level: 'ok', code: 'prob', p: span(m[1], m[2]) });
+  return { comp, found, flags, monthlyFigures: k === 12, ok: comp.basic > 0 && sum > 0 };
+}
+if (typeof module !== 'undefined') module.exports = { inRelief, incomeTax, compute, derive, monthBoxes, parseLetter, cleanOcr, CITIES };
+
+// Words for the page in English, Hindi and Kannada. Money terms people already say in English (CTC, PF, HRA, EMI) stay as they are.
+const T = {
+en: {
+  n_relief: 'marginal relief: tax capped at income above ₹12 lakh, plus cess',
+  priv: 'Read on your device. Your letter is never uploaded.', ocr: 'Reading the screenshot… {p}%', ocrload: 'Getting the screenshot reader ready (first time only)…', e_ocr: 'The screenshot could not be read clearly. Try a sharper, straight photo of the salary table, or paste the numbers.',
+  f45: 'Portrait 4:5 · Instagram, LinkedIn', f169: 'Wide 16:9 · X, WhatsApp', tleft: 'left', swipe: 'Swipe to compare',
+  tag: 'Your offer letter, corrected in red pen. See what reaches your bank and what a month on it looks like.',
+  dear: 'Dear Candidate,', letter: 'We are pleased to offer you a total annual compensation of',
+  onpaper: '= {x} a month on paper', inbank: 'a month reaches your bank',
+  quick: 'The offer is {lpa} lakh a year, of which {var} % is variable pay.',
+  read: 'Read my offer letter', fromletter: 'Figures read from your letter.', back: 'Use a quick estimate instead',
+  annex: 'Annexure: where the CTC goes',
+  basic: 'Basic pay', hra: 'House rent allowance', allow: 'Other allowances', epf: 'Employer PF', grat: 'Gratuity', vari: 'Variable pay', once: 'One-time bonus', ben: 'Insurance and benefits', unexp: 'Not explained in the letter',
+  ctcline: 'CTC on the letter', gross: 'Monthly pay before cuts', yourpf: 'Your PF share', tax: 'Income tax', pt: 'Professional tax', bank: 'In your bank',
+  n_epf: 'your savings, but locked in PF', n_grat: 'only if you stay about 5 years', n_var: 'not guaranteed', n_once: 'paid once', n_ben: 'never arrives as cash', n_unexp: 'ask HR what this is', n_yourpf: 'also your savings', n_taxnil: 'nil under ₹12 lakh',
+  never: '{x} of this CTC ({p}%) never shows up in a monthly salary.',
+  month: 'Your month in 30 boxes', life: "I'll live in {city}, in {home}, {food}, travelling by {ride}.",
+  home: ['a PG room', 'a shared flat', 'a 1BHK alone'], food: ['cooking at home', 'a mix of home and outside', 'mostly ordering in'], ride: ['metro and bus', 'my own two-wheeler', 'a cab every day'],
+  cat: { 'Rent': 'Rent', 'Food': 'Food', 'Travel': 'Travel', 'Bills, phone, fun': 'Bills, phone, fun', 'EMI + sent home': 'EMI + sent home', 'Left over': 'Left over' }, owe: 'Borrowed',
+  left30: 'Left on the 30th', runout: 'money runs out on day {d}', tight: 'tight: under 15% saved',
+  share: 'Make a share card', own: 'Use my own numbers', rentl: 'My rent, ₹ a month', billsl: 'Bills, phone, fun, ₹', emil: 'EMI + money sent home, ₹', basicl: 'Basic pay, % of fixed', pfl: 'Provident fund', pfo: ['12% of basic', 'capped at ₹1,800 a month', 'none'], est: 'estimate',
+  v_same: '{a} and {b} leave you about the same each month.', v_more: '{a} leaves you {x} more every month', v_even: ', even though {b} is {y} bigger on paper.', v_end: '.',
+  how: '<b>How the numbers are worked out.</b> New tax regime for FY 2026-27: ₹75,000 standard deduction, no tax up to ₹12 lakh of taxable income, 4% cess. The monthly figure leaves out variable pay and one-time bonuses. Your PF share is taken as equal to the employer\'s. Rent, food and travel start as rough estimates for one person, so put in your own. Your real payslip depends on your company\'s payroll. This is an estimate, not tax advice.',
+  rd_t: 'Read my offer letter', rd_i: 'Paste the salary table from your letter, or choose the PDF or a screenshot. It is read on this device and is not uploaded anywhere.', rd_go: 'Read it', rd_s: 'Try a sample letter', rd_x: 'Cancel',
+  e_empty: 'Nothing to read yet. Paste the salary table or choose a PDF.', e_nobasic: 'I could not find a Basic pay line with an amount. Paste the table that lists Basic, HRA and the other parts.', e_scan: 'This PDF is a scan, so it has no text to read. Type or paste the salary table instead.', e_file: 'That file could not be opened. Paste the salary table as text instead.', reading: 'Reading…',
+  sh_t: 'Share card', sh_h: 'Press and hold the picture to save it. On a computer, right-click it.', sh_c: 'Copy as text', sh_x: 'Close', copied: 'Copied', blocked: 'Copy is blocked here',
+  c1: 'We are pleased to offer you', c2: 'a total annual compensation of', c_bank: 'a month is what reaches my bank', c_month: 'MY MONTH IN 30 BOXES', c_foot: 'CTC Reality  ·  estimate, FY 2026-27',
+  s_text: '{name}: the letter says {ctc} a year. {inh} a month reaches the bank. After rent, food and travel in {city}, {left} is left.',
+  f_claw: 'The joining bonus must be paid back if you leave within {p}.', f_claw0: 'The joining bonus must be paid back if you leave early.', f_once: 'The one-time bonus comes once. Ask if it must be returned when you leave early.',
+  f_notice: 'Notice period: {p}.', f_noticelong: 'Notice period: {p}. Long notice makes your next switch harder.', f_bond: 'There is a service bond of {x}. Leaving early can cost you money.', f_bond0: 'There is a service bond. Leaving early can cost you money.',
+  f_var: '{pct}% of this offer is variable pay. It is not guaranteed.', f_ben: '{x} of the CTC is benefits such as insurance. It never reaches your bank.', f_mis: 'The parts add up to {x}, not {y}. Ask HR what the rest is.', f_prob: 'Probation: {p}.',
+  unit: { day: 'days', month: 'months', year: 'years' }, stamp: 'better deal'
+},
+hi: {
+  n_relief: 'मार्जिनल रिलीफ़: टैक्स ₹12 लाख से ऊपर की आय तक सीमित, ऊपर से सेस',
+  priv: 'आपके डिवाइस पर ही पढ़ा जाता है। लेटर कभी अपलोड नहीं होता।', ocr: 'स्क्रीनशॉट पढ़ रहा है… {p}%', ocrload: 'स्क्रीनशॉट रीडर तैयार हो रहा है (सिर्फ़ पहली बार)…', e_ocr: 'स्क्रीनशॉट साफ़ नहीं पढ़ा गया। सैलरी टेबल की सीधी, साफ़ फ़ोटो लें, या आँकड़े पेस्ट करें।',
+  f45: 'खड़ा 4:5 · Instagram, LinkedIn', f169: 'चौड़ा 16:9 · X, WhatsApp', tleft: 'बचा', swipe: 'तुलना के लिए स्वाइप करें',
+  tag: 'आपका ऑफ़र लेटर, लाल पेन से ठीक किया हुआ। देखिए बैंक में असल में कितना आता है और उस पर महीना कैसा कटता है।',
+  dear: 'प्रिय उम्मीदवार,', letter: 'हमें आपको यह कुल सालाना पैकेज ऑफ़र करते हुए ख़ुशी है:',
+  onpaper: '= काग़ज़ पर {x} महीना', inbank: 'हर महीने बैंक में आता है',
+  quick: 'ऑफ़र {lpa} लाख सालाना है, जिसमें {var} % वेरिएबल पे है।',
+  read: 'मेरा ऑफ़र लेटर पढ़ो', fromletter: 'आँकड़े आपके लेटर से लिए गए हैं।', back: 'मोटा अंदाज़ा इस्तेमाल करें',
+  annex: 'एनेक्सचर: CTC कहाँ जाता है',
+  basic: 'बेसिक पे', hra: 'हाउस रेंट अलाउंस (HRA)', allow: 'बाक़ी अलाउंस', epf: 'कंपनी का PF', grat: 'ग्रेच्युटी', vari: 'वेरिएबल पे', once: 'एक बार का बोनस', ben: 'बीमा और सुविधाएँ', unexp: 'लेटर में साफ़ नहीं',
+  ctcline: 'लेटर पर CTC', gross: 'कटौती से पहले महीने की सैलरी', yourpf: 'आपका PF', tax: 'इनकम टैक्स', pt: 'प्रोफ़ेशनल टैक्स', bank: 'आपके बैंक में',
+  n_epf: 'आपकी बचत, पर PF में बंद', n_grat: 'क़रीब 5 साल टिकने पर ही', n_var: 'पक्का नहीं', n_once: 'सिर्फ़ एक बार', n_ben: 'कैश में कभी नहीं आता', n_unexp: 'HR से पूछिए', n_yourpf: 'यह भी आपकी बचत', n_taxnil: '₹12 लाख तक शून्य',
+  never: 'इस CTC के {x} ({p}%) कभी महीने की सैलरी में नहीं दिखते।',
+  month: 'आपका महीना, 30 डिब्बों में', life: 'शहर {city}, घर {home}, खाना {food}, सफ़र {ride}।',
+  home: ['PG का कमरा', 'शेयर्ड फ़्लैट', 'अकेले 1BHK'], food: ['घर पर बनाना', 'कुछ घर, कुछ बाहर', 'ज़्यादातर ऑर्डर'], ride: ['मेट्रो और बस', 'अपनी बाइक या स्कूटर', 'रोज़ कैब'],
+  cat: { 'Rent': 'किराया', 'Food': 'खाना', 'Travel': 'सफ़र', 'Bills, phone, fun': 'बिल, फ़ोन, मौज', 'EMI + sent home': 'EMI + घर भेजा', 'Left over': 'बचा' }, owe: 'उधार',
+  left30: '30 तारीख़ को बचा', runout: 'पैसा {d} तारीख़ को ख़त्म', tight: 'तंग: 15% से कम बचत',
+  share: 'शेयर कार्ड बनाओ', own: 'अपने आँकड़े डालें', rentl: 'मेरा किराया, ₹ महीना', billsl: 'बिल, फ़ोन, मौज, ₹', emil: 'EMI + घर भेजा पैसा, ₹', basicl: 'बेसिक पे, फ़िक्स्ड का %', pfl: 'प्रोविडेंट फ़ंड', pfo: ['बेसिक का 12%', '₹1,800 महीना तक सीमित', 'नहीं'], est: 'अंदाज़ा',
+  v_same: '{a} और {b} में हर महीने लगभग बराबर बचता है।', v_more: '{a} में हर महीने {x} ज़्यादा बचता है', v_even: ', जबकि काग़ज़ पर {b} {y} बड़ा है।', v_end: '।',
+  how: '<b>हिसाब कैसे लगाया।</b> नई टैक्स व्यवस्था, FY 2026-27: ₹75,000 स्टैंडर्ड डिडक्शन, ₹12 लाख तक की टैक्सेबल आय पर टैक्स नहीं, 4% सेस। महीने के आँकड़े में वेरिएबल पे और एक बार के बोनस शामिल नहीं हैं। आपका PF हिस्सा कंपनी के बराबर माना है। किराया, खाना और सफ़र एक व्यक्ति के मोटे अंदाज़े हैं, अपने आँकड़े डालिए। असली पेस्लिप आपकी कंपनी के पेरोल पर निर्भर है। यह अंदाज़ा है, टैक्स सलाह नहीं।',
+  rd_t: 'मेरा ऑफ़र लेटर पढ़ो', rd_i: 'अपने लेटर की सैलरी टेबल यहाँ पेस्ट करें, या PDF या स्क्रीनशॉट चुनें। यह इसी डिवाइस पर पढ़ा जाता है, कहीं अपलोड नहीं होता।', rd_go: 'पढ़ो', rd_s: 'नमूना लेटर आज़माएँ', rd_x: 'रद्द करें',
+  e_empty: 'अभी पढ़ने को कुछ नहीं है। सैलरी टेबल पेस्ट करें या PDF चुनें।', e_nobasic: 'रक़म के साथ बेसिक पे की लाइन नहीं मिली। वह टेबल पेस्ट करें जिसमें Basic, HRA और बाक़ी हिस्से लिखे हों।', e_scan: 'यह PDF स्कैन है, इसमें पढ़ने लायक़ टेक्स्ट नहीं है। सैलरी टेबल टाइप या पेस्ट करें।', e_file: 'यह फ़ाइल नहीं खुली। सैलरी टेबल टेक्स्ट में पेस्ट करें।', reading: 'पढ़ रहा है…',
+  sh_t: 'शेयर कार्ड', sh_h: 'सेव करने के लिए तस्वीर को दबाकर रखें। कंप्यूटर पर राइट-क्लिक करें।', sh_c: 'टेक्स्ट कॉपी करें', sh_x: 'बंद करें', copied: 'कॉपी हो गया', blocked: 'यहाँ कॉपी नहीं हो सकता',
+  c1: 'हमें आपको यह कुल सालाना', c2: 'पैकेज ऑफ़र करते हुए ख़ुशी है:', c_bank: 'महीना ही मेरे बैंक में आता है', c_month: 'मेरा महीना, 30 डिब्बों में', c_foot: 'CTC Reality  ·  अंदाज़ा, FY 2026-27',
+  s_text: '{name}: लेटर पर {ctc} सालाना। बैंक में {inh} महीना आता है। {city} में किराया, खाना और सफ़र के बाद {left} बचता है।',
+  f_claw: '{p} के अंदर छोड़ने पर जॉइनिंग बोनस लौटाना होगा।', f_claw0: 'जल्दी छोड़ने पर जॉइनिंग बोनस लौटाना होगा।', f_once: 'एक बार का बोनस सिर्फ़ एक बार मिलता है। पूछिए कि जल्दी छोड़ने पर लौटाना तो नहीं पड़ेगा।',
+  f_notice: 'नोटिस पीरियड: {p}।', f_noticelong: 'नोटिस पीरियड: {p}। लंबा नोटिस अगली नौकरी बदलना मुश्किल करता है।', f_bond: '{x} का सर्विस बॉन्ड है। जल्दी छोड़ना महँगा पड़ सकता है।', f_bond0: 'सर्विस बॉन्ड है। जल्दी छोड़ना महँगा पड़ सकता है।',
+  f_var: 'इस ऑफ़र का {pct}% वेरिएबल पे है। यह पक्का नहीं है।', f_ben: 'CTC के {x} बीमा जैसी सुविधाएँ हैं। यह बैंक में कभी नहीं आता।', f_mis: 'हिस्सों का जोड़ {x} है, {y} नहीं। HR से पूछिए बाक़ी क्या है।', f_prob: 'प्रोबेशन: {p}।',
+  unit: { day: 'दिन', month: 'महीने', year: 'साल' }, stamp: 'बेहतर सौदा'
+},
+kn: {
+  n_relief: 'ಮಾರ್ಜಿನಲ್ ರಿಲೀಫ್: ತೆರಿಗೆ ₹12 ಲಕ್ಷ ಮೇಲಿನ ಆದಾಯಕ್ಕೆ ಮಿತಿ, ಜೊತೆಗೆ ಸೆಸ್',
+  priv: 'ನಿಮ್ಮ ಸಾಧನದಲ್ಲೇ ಓದಲಾಗುತ್ತದೆ. ಲೆಟರ್ ಎಂದೂ ಅಪ್‌ಲೋಡ್ ಆಗುವುದಿಲ್ಲ.', ocr: 'ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ಓದುತ್ತಿದೆ… {p}%', ocrload: 'ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ರೀಡರ್ ಸಿದ್ಧವಾಗುತ್ತಿದೆ (ಮೊದಲ ಬಾರಿ ಮಾತ್ರ)…', e_ocr: 'ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ಸ್ಪಷ್ಟವಾಗಿ ಓದಲಾಗಲಿಲ್ಲ. ಸಂಬಳದ ಟೇಬಲ್‌ನ ನೇರ, ಸ್ಪಷ್ಟ ಫೋಟೋ ತೆಗೆಯಿರಿ, ಅಥವಾ ಅಂಕಿಗಳನ್ನು ಪೇಸ್ಟ್ ಮಾಡಿ.',
+  f45: 'ಉದ್ದ 4:5 · Instagram, LinkedIn', f169: 'ಅಗಲ 16:9 · X, WhatsApp', tleft: 'ಉಳಿದದ್ದು', swipe: 'ಹೋಲಿಸಲು ಸ್ವೈಪ್ ಮಾಡಿ',
+  tag: 'ನಿಮ್ಮ ಆಫರ್ ಲೆಟರ್, ಕೆಂಪು ಪೆನ್ನಿನಿಂದ ತಿದ್ದಿದ್ದು. ಬ್ಯಾಂಕಿಗೆ ನಿಜವಾಗಿ ಎಷ್ಟು ಬರುತ್ತದೆ, ಆ ಹಣದಲ್ಲಿ ತಿಂಗಳು ಹೇಗೆ ಸಾಗುತ್ತದೆ ನೋಡಿ.',
+  dear: 'ಪ್ರಿಯ ಅಭ್ಯರ್ಥಿ,', letter: 'ನಿಮಗೆ ಈ ಒಟ್ಟು ವಾರ್ಷಿಕ ಪ್ಯಾಕೇಜ್ ನೀಡಲು ನಮಗೆ ಸಂತೋಷ:',
+  onpaper: '= ಕಾಗದದಲ್ಲಿ ತಿಂಗಳಿಗೆ {x}', inbank: 'ಪ್ರತಿ ತಿಂಗಳು ಬ್ಯಾಂಕಿಗೆ ಬರುತ್ತದೆ',
+  quick: 'ಆಫರ್ ವರ್ಷಕ್ಕೆ {lpa} ಲಕ್ಷ, ಅದರಲ್ಲಿ {var} % ವೇರಿಯಬಲ್ ಪೇ.',
+  read: 'ನನ್ನ ಆಫರ್ ಲೆಟರ್ ಓದಿ', fromletter: 'ಅಂಕಿಗಳನ್ನು ನಿಮ್ಮ ಲೆಟರ್‌ನಿಂದ ತೆಗೆದುಕೊಳ್ಳಲಾಗಿದೆ.', back: 'ಅಂದಾಜು ಲೆಕ್ಕ ಬಳಸಿ',
+  annex: 'ಅನೆಕ್ಸರ್: CTC ಎಲ್ಲಿಗೆ ಹೋಗುತ್ತದೆ',
+  basic: 'ಬೇಸಿಕ್ ಪೇ', hra: 'ಮನೆ ಬಾಡಿಗೆ ಭತ್ಯೆ (HRA)', allow: 'ಇತರ ಭತ್ಯೆಗಳು', epf: 'ಕಂಪನಿಯ PF', grat: 'ಗ್ರಾಚ್ಯುಟಿ', vari: 'ವೇರಿಯಬಲ್ ಪೇ', once: 'ಒಂದು ಬಾರಿಯ ಬೋನಸ್', ben: 'ವಿಮೆ ಮತ್ತು ಸೌಲಭ್ಯಗಳು', unexp: 'ಲೆಟರ್‌ನಲ್ಲಿ ವಿವರವಿಲ್ಲ',
+  ctcline: 'ಲೆಟರ್‌ನಲ್ಲಿರುವ CTC', gross: 'ಕಡಿತಕ್ಕೆ ಮುನ್ನ ತಿಂಗಳ ಸಂಬಳ', yourpf: 'ನಿಮ್ಮ PF', tax: 'ಆದಾಯ ತೆರಿಗೆ', pt: 'ವೃತ್ತಿ ತೆರಿಗೆ', bank: 'ನಿಮ್ಮ ಬ್ಯಾಂಕಿಗೆ',
+  n_epf: 'ನಿಮ್ಮ ಉಳಿತಾಯ, ಆದರೆ PF ನಲ್ಲಿ ಲಾಕ್', n_grat: 'ಸುಮಾರು 5 ವರ್ಷ ಇದ್ದರೆ ಮಾತ್ರ', n_var: 'ಖಚಿತವಲ್ಲ', n_once: 'ಒಂದೇ ಬಾರಿ', n_ben: 'ನಗದಾಗಿ ಎಂದೂ ಬರುವುದಿಲ್ಲ', n_unexp: 'HR ಅನ್ನು ಕೇಳಿ', n_yourpf: 'ಇದೂ ನಿಮ್ಮ ಉಳಿತಾಯ', n_taxnil: '₹12 ಲಕ್ಷದವರೆಗೆ ಇಲ್ಲ',
+  never: 'ಈ CTC ಯ {x} ({p}%) ತಿಂಗಳ ಸಂಬಳದಲ್ಲಿ ಎಂದೂ ಕಾಣುವುದಿಲ್ಲ.',
+  month: 'ನಿಮ್ಮ ತಿಂಗಳು, 30 ಚೌಕಗಳಲ್ಲಿ', life: 'ನಗರ {city}, ಮನೆ {home}, ಊಟ {food}, ಪ್ರಯಾಣ {ride}.',
+  home: ['PG ರೂಮ್', 'ಶೇರ್ಡ್ ಫ್ಲ್ಯಾಟ್', 'ಒಬ್ಬರೇ 1BHK'], food: ['ಮನೆಯಲ್ಲಿ ಅಡುಗೆ', 'ಸ್ವಲ್ಪ ಮನೆ, ಸ್ವಲ್ಪ ಹೊರಗೆ', 'ಹೆಚ್ಚಾಗಿ ಆರ್ಡರ್'], ride: ['ಮೆಟ್ರೋ ಮತ್ತು ಬಸ್', 'ಸ್ವಂತ ಬೈಕ್ ಅಥವಾ ಸ್ಕೂಟರ್', 'ದಿನವೂ ಕ್ಯಾಬ್'],
+  cat: { 'Rent': 'ಬಾಡಿಗೆ', 'Food': 'ಊಟ', 'Travel': 'ಪ್ರಯಾಣ', 'Bills, phone, fun': 'ಬಿಲ್, ಫೋನ್, ಮೋಜು', 'EMI + sent home': 'EMI + ಮನೆಗೆ ಕಳಿಸಿದ್ದು', 'Left over': 'ಉಳಿದದ್ದು' }, owe: 'ಸಾಲ',
+  left30: '30ನೇ ತಾರೀಖಿಗೆ ಉಳಿದದ್ದು', runout: 'ಹಣ {d}ನೇ ದಿನಕ್ಕೆ ಮುಗಿಯುತ್ತದೆ', tight: 'ಬಿಗಿ: 15% ಗಿಂತ ಕಡಿಮೆ ಉಳಿತಾಯ',
+  share: 'ಶೇರ್ ಕಾರ್ಡ್ ಮಾಡಿ', own: 'ನನ್ನ ಅಂಕಿಗಳನ್ನು ಹಾಕಿ', rentl: 'ನನ್ನ ಬಾಡಿಗೆ, ತಿಂಗಳಿಗೆ ₹', billsl: 'ಬಿಲ್, ಫೋನ್, ಮೋಜು, ₹', emil: 'EMI + ಮನೆಗೆ ಕಳಿಸುವ ಹಣ, ₹', basicl: 'ಬೇಸಿಕ್ ಪೇ, ಫಿಕ್ಸ್ಡ್‌ನ %', pfl: 'ಪ್ರಾವಿಡೆಂಟ್ ಫಂಡ್', pfo: ['ಬೇಸಿಕ್‌ನ 12%', 'ತಿಂಗಳಿಗೆ ₹1,800 ಮಿತಿ', 'ಇಲ್ಲ'], est: 'ಅಂದಾಜು',
+  v_same: '{a} ಮತ್ತು {b} ಎರಡರಲ್ಲೂ ಪ್ರತಿ ತಿಂಗಳು ಸುಮಾರು ಒಂದೇ ಉಳಿಯುತ್ತದೆ.', v_more: '{a} ನಲ್ಲಿ ಪ್ರತಿ ತಿಂಗಳು {x} ಹೆಚ್ಚು ಉಳಿಯುತ್ತದೆ', v_even: ', ಕಾಗದದಲ್ಲಿ {b} {y} ದೊಡ್ಡದಾಗಿದ್ದರೂ.', v_end: '.',
+  how: '<b>ಲೆಕ್ಕ ಹೇಗೆ ಮಾಡಲಾಗಿದೆ.</b> ಹೊಸ ತೆರಿಗೆ ಪದ್ಧತಿ, FY 2026-27: ₹75,000 ಸ್ಟ್ಯಾಂಡರ್ಡ್ ಡಿಡಕ್ಷನ್, ₹12 ಲಕ್ಷದವರೆಗಿನ ತೆರಿಗೆ ಆದಾಯಕ್ಕೆ ತೆರಿಗೆ ಇಲ್ಲ, 4% ಸೆಸ್. ತಿಂಗಳ ಅಂಕಿಯಲ್ಲಿ ವೇರಿಯಬಲ್ ಪೇ ಮತ್ತು ಒಂದು ಬಾರಿಯ ಬೋನಸ್ ಸೇರಿಲ್ಲ. ನಿಮ್ಮ PF ಪಾಲು ಕಂಪನಿಯಷ್ಟೇ ಎಂದು ಪರಿಗಣಿಸಲಾಗಿದೆ. ಬಾಡಿಗೆ, ಊಟ, ಪ್ರಯಾಣ ಒಬ್ಬ ವ್ಯಕ್ತಿಯ ಸ್ಥೂಲ ಅಂದಾಜು, ನಿಮ್ಮ ಅಂಕಿಗಳನ್ನು ಹಾಕಿ. ನಿಜವಾದ ಪೇಸ್ಲಿಪ್ ನಿಮ್ಮ ಕಂಪನಿಯ ಪೇರೋಲ್ ಮೇಲೆ ಅವಲಂಬಿತ. ಇದು ಅಂದಾಜು, ತೆರಿಗೆ ಸಲಹೆ ಅಲ್ಲ.',
+  rd_t: 'ನನ್ನ ಆಫರ್ ಲೆಟರ್ ಓದಿ', rd_i: 'ನಿಮ್ಮ ಲೆಟರ್‌ನ ಸಂಬಳದ ಟೇಬಲ್ ಇಲ್ಲಿ ಪೇಸ್ಟ್ ಮಾಡಿ, ಅಥವಾ PDF ಅಥವಾ ಸ್ಕ್ರೀನ್‌ಶಾಟ್ ಆಯ್ಕೆಮಾಡಿ. ಇದನ್ನು ಇದೇ ಸಾಧನದಲ್ಲಿ ಓದಲಾಗುತ್ತದೆ, ಎಲ್ಲಿಗೂ ಅಪ್‌ಲೋಡ್ ಆಗುವುದಿಲ್ಲ.', rd_go: 'ಓದಿ', rd_s: 'ಮಾದರಿ ಲೆಟರ್ ಪ್ರಯತ್ನಿಸಿ', rd_x: 'ರದ್ದು',
+  e_empty: 'ಓದಲು ಇನ್ನೂ ಏನೂ ಇಲ್ಲ. ಸಂಬಳದ ಟೇಬಲ್ ಪೇಸ್ಟ್ ಮಾಡಿ ಅಥವಾ PDF ಆಯ್ಕೆಮಾಡಿ.', e_nobasic: 'ಮೊತ್ತದ ಜೊತೆ ಬೇಸಿಕ್ ಪೇ ಸಾಲು ಸಿಗಲಿಲ್ಲ. Basic, HRA ಮತ್ತು ಇತರ ಭಾಗಗಳಿರುವ ಟೇಬಲ್ ಪೇಸ್ಟ್ ಮಾಡಿ.', e_scan: 'ಈ PDF ಸ್ಕ್ಯಾನ್ ಆಗಿದೆ, ಓದಲು ಪಠ್ಯ ಇಲ್ಲ. ಸಂಬಳದ ಟೇಬಲ್ ಟೈಪ್ ಅಥವಾ ಪೇಸ್ಟ್ ಮಾಡಿ.', e_file: 'ಈ ಫೈಲ್ ತೆರೆಯಲಾಗಲಿಲ್ಲ. ಸಂಬಳದ ಟೇಬಲ್ ಅನ್ನು ಪಠ್ಯವಾಗಿ ಪೇಸ್ಟ್ ಮಾಡಿ.', reading: 'ಓದುತ್ತಿದೆ…',
+  sh_t: 'ಶೇರ್ ಕಾರ್ಡ್', sh_h: 'ಸೇವ್ ಮಾಡಲು ಚಿತ್ರವನ್ನು ಒತ್ತಿ ಹಿಡಿಯಿರಿ. ಕಂಪ್ಯೂಟರ್‌ನಲ್ಲಿ ರೈಟ್-ಕ್ಲಿಕ್ ಮಾಡಿ.', sh_c: 'ಪಠ್ಯ ಕಾಪಿ ಮಾಡಿ', sh_x: 'ಮುಚ್ಚಿ', copied: 'ಕಾಪಿ ಆಯಿತು', blocked: 'ಇಲ್ಲಿ ಕಾಪಿ ಆಗುವುದಿಲ್ಲ',
+  c1: 'ನಿಮಗೆ ಈ ಒಟ್ಟು ವಾರ್ಷಿಕ', c2: 'ಪ್ಯಾಕೇಜ್ ನೀಡಲು ನಮಗೆ ಸಂತೋಷ:', c_bank: 'ತಿಂಗಳಿಗೆ ನನ್ನ ಬ್ಯಾಂಕಿಗೆ ಬರುವುದು ಇಷ್ಟೇ', c_month: 'ನನ್ನ ತಿಂಗಳು, 30 ಚೌಕಗಳಲ್ಲಿ', c_foot: 'CTC Reality  ·  ಅಂದಾಜು, FY 2026-27',
+  s_text: '{name}: ಲೆಟರ್‌ನಲ್ಲಿ ವರ್ಷಕ್ಕೆ {ctc}. ಬ್ಯಾಂಕಿಗೆ ತಿಂಗಳಿಗೆ {inh} ಬರುತ್ತದೆ. {city}: ಬಾಡಿಗೆ, ಊಟ, ಪ್ರಯಾಣದ ನಂತರ {left} ಉಳಿಯುತ್ತದೆ.',
+  f_claw: '{p} ಒಳಗೆ ಬಿಟ್ಟರೆ ಜಾಯಿನಿಂಗ್ ಬೋನಸ್ ಹಿಂತಿರುಗಿಸಬೇಕು.', f_claw0: 'ಬೇಗ ಬಿಟ್ಟರೆ ಜಾಯಿನಿಂಗ್ ಬೋನಸ್ ಹಿಂತಿರುಗಿಸಬೇಕು.', f_once: 'ಒಂದು ಬಾರಿಯ ಬೋನಸ್ ಒಮ್ಮೆ ಮಾತ್ರ ಸಿಗುತ್ತದೆ. ಬೇಗ ಬಿಟ್ಟರೆ ಹಿಂತಿರುಗಿಸಬೇಕೇ ಎಂದು ಕೇಳಿ.',
+  f_notice: 'ನೋಟಿಸ್ ಅವಧಿ: {p}.', f_noticelong: 'ನೋಟಿಸ್ ಅವಧಿ: {p}. ಉದ್ದ ನೋಟಿಸ್ ಮುಂದಿನ ಕೆಲಸ ಬದಲಾವಣೆಯನ್ನು ಕಷ್ಟ ಮಾಡುತ್ತದೆ.', f_bond: '{x} ಸರ್ವಿಸ್ ಬಾಂಡ್ ಇದೆ. ಬೇಗ ಬಿಟ್ಟರೆ ದುಬಾರಿಯಾಗಬಹುದು.', f_bond0: 'ಸರ್ವಿಸ್ ಬಾಂಡ್ ಇದೆ. ಬೇಗ ಬಿಟ್ಟರೆ ದುಬಾರಿಯಾಗಬಹುದು.',
+  f_var: 'ಈ ಆಫರ್‌ನ {pct}% ವೇರಿಯಬಲ್ ಪೇ. ಇದು ಖಚಿತವಲ್ಲ.', f_ben: 'CTC ಯ {x} ವಿಮೆಯಂತಹ ಸೌಲಭ್ಯಗಳು. ಇದು ಬ್ಯಾಂಕಿಗೆ ಎಂದೂ ಬರುವುದಿಲ್ಲ.', f_mis: 'ಭಾಗಗಳ ಮೊತ್ತ {x}, {y} ಅಲ್ಲ. ಉಳಿದದ್ದು ಏನೆಂದು HR ಅನ್ನು ಕೇಳಿ.', f_prob: 'ಪ್ರೊಬೇಶನ್: {p}.',
+  unit: { day: 'ದಿನ', month: 'ತಿಂಗಳು', year: 'ವರ್ಷ' }, stamp: 'ಉತ್ತಮ ಡೀಲ್'
+}
+};
+if (typeof module !== 'undefined') module.exports = { T };
+
+</script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const inr=n=>(n<0?'−':'')+'₹'+Math.round(Math.abs(n)).toLocaleString('en-IN');
+let lang='en';
+const t=(k,v)=>{let s=(T[lang]&&T[lang][k]!=null?T[lang][k]:T.en[k]);if(v&&typeof s==='string')for(const x in v)s=s.split('{'+x+'}').join(v[x]);return s};
+const span=p=>p?p.n+' '+t('unit')[p.u]:'';
+const flagText=f=>t('f_'+f.code,{p:span(f.p),x:inr(f.x||0),y:inr(f.y||0),pct:f.pct});
+const TINT={'Rent':'#1a2333','Food':'#4d5f82','Travel':'#8493b3','Bills, phone, fun':'#b9c3d6','EMI + sent home':'#7b5aa6','Left over':'#1a8a5c'};
+const DEF=[{name:'Offer A',mode:'quick',lpa:12,varPct:10,basicPct:50,pf:'full',city:'Bengaluru',home:1,food:1,ride:0,other:6500,emi:0,rent:null,comp:null,flags:[]},
+           {name:'Offer B',mode:'quick',lpa:10,varPct:5,basicPct:50,pf:'full',city:'Pune',home:1,food:1,ride:0,other:6500,emi:0,rent:null,comp:null,flags:[]}];
+const SAMPLE=`ANNEXURE A - COMPENSATION DETAILS
+Component                        Per Annum (INR)
+Basic Salary                     4,80,000
+House Rent Allowance             2,40,000
+Special Allowance                1,86,312
+Employer's contribution to PF    57,600
+Gratuity                         23,088
+Medical Insurance Premium        13,000
+Performance Linked Bonus         1,00,000
+Joining Bonus (one time)         1,00,000
+Total Cost to Company            12,00,000
+
+The joining bonus shall be recovered in full if you resign within 12 months of joining.
+Your notice period will be 90 days. You will be on probation for 6 months.`;
+let S,R=[],target=0,shareText='',view=0,fmt='45';
+function show(k){view=k;$('desk').dataset.show=k;$('tabs').querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',+b.dataset.k===k));if(matchMedia('(max-width:760px)').matches)$('tabs').scrollIntoView({block:'start',behavior:'smooth'})}
+
+function sheet(i){const o=S[i],p='o'+i+'-';
+const sel=k=>`<select id="${p}${k}" aria-label="${k}">${t(k).map((x,j)=>`<option value="${j}"${j==o[k]?' selected':''}>${x}</option>`).join('')}</select>`;
+const city=`<select id="${p}city" aria-label="City">${Object.keys(CITIES).map(c=>`<option${c===o.city?' selected':''}>${c}</option>`).join('')}</select>`;
+const num=(k,a)=>`<input id="${p}${k}" type="number" inputmode="decimal" ${a} value="${o[k]}" aria-label="${k}">`;
+return `<article class="sheet" id="${p}sheet" data-stamp="${esc(t('stamp'))}">
+ <div class="lh"><input id="${p}name" value="${esc(o.name)}" maxlength="22" aria-label="Offer name"><button class="link" id="${p}read">${t('read')}</button></div>
+ <p class="typed">${t('dear')}<br>${t('letter')}</p>
+ <div class="claim"><span class="paper"><span class="struck" id="${p}ctc"></span><span class="onpaper" id="${p}paper"></span></span><span class="real"><b id="${p}in"></b>${t('inbank')}</span></div>
+ <p class="fill" id="${p}quick">${t('quick',{lpa:num('lpa','min="1" max="300" step="0.5"'),var:num('varPct','min="0" max="60" step="1"')})}</p>
+ <p class="fill" id="${p}fromletter" hidden>${t('fromletter')} <button class="link" id="${p}back">${t('back')}</button></p>
+ <h2>${t('annex')}</h2>
+ <table><tbody id="${p}rows"></tbody></table>
+ <p class="margin" id="${p}never"></p>
+ <ul class="flags" id="${p}flags"></ul>
+ <h2>${t('month')}</h2>
+ <p class="fill">${t('life',{city,home:sel('home'),food:sel('food'),ride:sel('ride')})}</p>
+ <div class="boxes" id="${p}boxes" role="img"></div>
+ <ul class="key" id="${p}key"></ul>
+ <div class="end"><span>${t('left30')}</span><b id="${p}left"></b><small id="${p}runout"></small></div>
+ <div class="foot"><button class="btn" id="${p}share">${t('share')}</button>
+ <details><summary>${t('own')}</summary><div class="own">
+  <label>${t('rentl')}<input id="${p}rent" type="number" inputmode="numeric" min="0" step="500" placeholder="${t('est')}" value="${o.rent??''}"></label>
+  <label>${t('billsl')}<input id="${p}other" type="number" inputmode="numeric" min="0" step="500" value="${o.other}"></label>
+  <label>${t('emil')}<input id="${p}emi" type="number" inputmode="numeric" min="0" step="500" value="${o.emi}"></label>
+  <label>${t('basicl')}<input id="${p}basicPct" type="number" inputmode="numeric" min="30" max="60" step="5" value="${o.basicPct}"></label>
+  <label>${t('pfl')}<select id="${p}pf">${['full','cap','none'].map((v,j)=>`<option value="${v}"${o.pf===v?' selected':''}>${t('pfo')[j]}</option>`).join('')}</select></label>
+ </div></details></div>
+</article>`}
+
+function paint(){R=S.map(compute);
+  R.forEach((r,i)=>{const o=S[i],p='o'+i+'-',c=r.c;
+    const ink=(id,v)=>{const el=$(id);if(el.textContent!==v){el.textContent=v;const host=el.closest('.claim');host.classList.remove('ink');void host.offsetWidth;host.classList.add('ink')}};
+    ink(p+'ctc',inr(r.ctc));$(p+'paper').textContent=t('onpaper',{x:inr(r.ctc/12)});ink(p+'in',inr(r.inHand));
+    $(p+'quick').hidden=o.mode==='letter';$(p+'fromletter').hidden=o.mode!=='letter';
+    const row=(a,b,m,cl)=>`<tr${cl?` class="${cl}"`:''}><td>${a}</td><td class="n">${b}</td><td class="m">${m||''}</td></tr>`;
+    let h='';[['basic',c.basic],['hra',c.hra],['allow',c.special]].forEach(x=>{if(x[1]>0)h+=row(t(x[0]),inr(x[1]))});
+    [['epf',c.epfEmployer,'n_epf'],['grat',c.gratuity,'n_grat'],['vari',c.variable,'n_var'],['once',c.oneTime,'n_once'],['ben',c.other,'n_ben'],['unexp',r.gap>r.ctc*.02?r.gap:0,'n_unexp']].forEach(x=>{if(x[1]>0)h+=row(t(x[0]),inr(x[1]),t(x[2]),'gone')});
+    h+=row(t('ctcline'),inr(r.ctc),'','tot')+row(t('gross'),inr(r.gross/12))+(r.epf?row(t('yourpf'),inr(-r.epf/12),t('n_yourpf')):'')+row(t('tax'),inr(-r.taxFixed/12),r.taxFixed?(inRelief(r.gross)?t('n_relief'):''):t('n_taxnil'))+(r.pt?row(t('pt'),inr(-r.pt/12)):'')+row(t('bank'),inr(r.inHand),'','bank');
+    $(p+'rows').innerHTML=h;
+    $(p+'never').textContent=t('never',{x:inr(r.neverMonthly),p:Math.round(100*r.neverMonthly/r.ctc)});
+    $(p+'flags').innerHTML=(o.mode==='letter'?o.flags:[]).filter(f=>f.code).map(f=>`<li class="${f.level}">${esc(flagText(f))}</li>`).join('');
+    const mb=monthBoxes(r),cells=[];mb.boxes.forEach(x=>{for(let k=0;k<x.n;k++)cells.push(`<i style="background:${TINT[x.label]}"></i>`)});
+    $(p+'boxes').innerHTML=cells.map((cell,k)=>r.left<0&&k>=mb.funded?'<i class="owe"></i>':cell).join('');
+    $(p+'boxes').setAttribute('aria-label',r.left<0?`Money covers ${mb.funded} of 30 days`:'30 days of spending by category');
+    $(p+'key').innerHTML=mb.boxes.map(x=>`<li><i style="background:${TINT[x.label]}"></i>${t('cat')[x.label]}<b>${inr(x.amount)}</b></li>`).join('')+(r.left<0?`<li><i style="background:var(--pen)"></i>${t('owe')}<b>${inr(-r.left)}</b></li>`:'');
+    const l=$(p+'left');l.textContent=inr(r.left);l.className=r.left<0?'neg':'pos';
+    $(p+'runout').textContent=r.left<0?t('runout',{d:r.runOutDay}):r.saveRate<.15?t('tight'):'';
+  });
+  const d=R[0].left-R[1].left,w=d>=0?0:1,l=1-w,gap=Math.abs(d);
+  $('o0-sheet').classList.toggle('pick',w===0&&gap>=500);$('o1-sheet').classList.toggle('pick',w===1&&gap>=500);
+  $('tabs').innerHTML=[0,1].map(k=>`<button role="tab" aria-selected="${k===view}" data-k="${k}"><span>${esc(S[k].name)}</span><b class="${R[k].left<0?'neg':'pos'}">${inr(R[k].left)}</b><small>${t('tleft')}</small></button>`).join('');
+  $('tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>show(+b.dataset.k));$('desk').dataset.show=view;
+  $('verdict').textContent=gap<500?t('v_same',{a:S[0].name,b:S[1].name}):t('v_more',{a:S[w].name,x:inr(gap)})+(R[w].ctc<R[l].ctc?t('v_even',{b:S[l].name,y:inr(R[l].ctc-R[w].ctc)}):t('v_end'));
+  try{localStorage.setItem('ctc-reality-v3',JSON.stringify({S,lang}))}catch(e){}
+}
+function bind(){[0,1].forEach(i=>{const p='o'+i+'-',o=S[i],num=['lpa','varPct','home','food','ride','other','emi','basicPct'];
+  ['name','city','pf','rent',...num].forEach(k=>$(p+k).addEventListener('input',e=>{const v=e.target.value;
+    if(k==='rent')o.rent=v===''?null:Math.max(0,+v);else if(num.includes(k))o[k]=Math.max(0,+v||0);else o[k]=v;
+    if(k==='city'||k==='home'){o.rent=null;$(p+'rent').value=''}paint()}));
+  $(p+'read').onclick=()=>{target=i;$('rd-err').textContent='';$('reader').hidden=false;$('rd-text').focus()};
+  $(p+'back').onclick=()=>{o.mode='quick';paint()};
+  $(p+'share').onclick=()=>card(i)})}
+function render(){document.documentElement.lang=lang;
+  [['priv','priv'],['f45','f45'],['f169','f169'],['tag','tag'],['rd-t','rd_t'],['rd-i','rd_i'],['rd-go','rd_go'],['rd-sample','rd_s'],['rd-x','rd_x'],['sh-t','sh_t'],['sh-h','sh_h'],['sh-copy','sh_c'],['sh-x','sh_x']].forEach(([id,k])=>{$(id).textContent=t(k)});
+  $('how').innerHTML=t('how');document.querySelectorAll('.langs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang));
+  $('desk').innerHTML=sheet(0)+sheet(1);bind();paint()}
+document.querySelectorAll('.langs button').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;render()});
+(()=>{let x0=null,y0=0;const d=$('desk');d.addEventListener('touchstart',e=>{if(e.target.closest('input,select,textarea,details'))return;x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+  d.addEventListener('touchend',e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;if(Math.abs(dx)>70&&Math.abs(dx)>2*Math.abs(dy)&&matchMedia('(max-width:760px)').matches)show(dx<0?1:0)},{passive:true})})();
+
+// ---------- offer letter reader ----------
+function applyLetter(text){const r=parseLetter(text);
+  if(!r.ok){$('rd-err').textContent=t(text.trim().length<20?'e_empty':'e_nobasic');return}
+  const o=S[target];o.mode='letter';o.comp=r.comp;o.flags=r.flags;o.lpa=Math.round(r.comp.ctc/10000)/10;$('reader').hidden=true;paint();$('o'+target+'-sheet').scrollIntoView({block:'start',behavior:'smooth'})}
+async function pdfText(file){
+  if(!window.pdfjsLib)await new Promise((ok,no)=>{const s=document.createElement('script');s.src='vendor/pdf.min.js';s.onload=ok;s.onerror=()=>no(new Error('load'));document.head.appendChild(s)});
+  pdfjsLib.GlobalWorkerOptions.workerSrc='vendor/pdf.worker.min.js';
+  const doc=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;let out='';
+  for(let n=1;n<=Math.min(doc.numPages,30);n++){const tc=await (await doc.getPage(n)).getTextContent(),lines={};
+    for(const it of tc.items){if(!it.str.trim())continue;const y=Math.round(it.transform[5]/3);(lines[y]=lines[y]||[]).push([it.transform[4],it.str])}
+    out+=Object.keys(lines).sort((a,b)=>b-a).map(y=>lines[y].sort((a,b)=>a[0]-b[0]).map(x=>x[1]).join('  ')).join('\n')+'\n'}
+  return out}
+let ocrWorker=null;
+async function ocrText(file){const abs=p=>new URL(p,location.href).href;
+  if(!ocrWorker){$('rd-err').textContent=t('ocrload');
+    if(!window.Tesseract)await new Promise((ok,no)=>{const s=document.createElement('script');s.src='vendor/ocr/tesseract.min.js';s.onload=ok;s.onerror=()=>no(new Error('load'));document.head.appendChild(s)});
+    const lang=new Uint8Array(await (await fetch('vendor/ocr/eng-traineddata.wasm')).arrayBuffer());
+    ocrWorker=await Tesseract.createWorker([{code:'eng',data:lang}],1,{workerPath:abs('vendor/ocr/worker.min.js'),corePath:abs('vendor/ocr/'),workerBlobURL:false,cacheMethod:'none',
+      logger:m=>{if(m.status==='recognizing text')$('rd-err').textContent=t('ocr',{p:Math.round(100*m.progress)})}})}
+  const {data}=await ocrWorker.recognize(file);return cleanOcr(data.text)}
+$('rd-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;$('rd-err').textContent=t('reading');
+  const isImg=/^image\//.test(f.type)||/\.(png|jpe?g|webp|heic)$/i.test(f.name);
+  if(isImg){try{const x=await ocrText(f);$('rd-text').value=x;const r=parseLetter(x);if(!r.ok){$('rd-err').textContent=t('e_ocr');e.target.value='';return}$('rd-err').textContent='';applyLetter(x)}catch(err){$('rd-err').textContent=t('e_ocr')}e.target.value='';return}
+  try{const x=/pdf$/i.test(f.name)||f.type==='application/pdf'?await pdfText(f):await f.text();
+    if(x.replace(/\s/g,'').length<40){$('rd-err').textContent=t('e_scan');return}
+    $('rd-text').value=x;$('rd-err').textContent='';applyLetter(x)}
+  catch(err){$('rd-err').textContent=t('e_file')}e.target.value=''});
+$('rd-go').onclick=()=>applyLetter($('rd-text').value);
+$('rd-sample').onclick=()=>{$('rd-text').value=SAMPLE;applyLetter(SAMPLE)};
+$('rd-x').onclick=()=>{$('reader').hidden=true};$('sh-x').onclick=()=>{$('share').hidden=true};
+addEventListener('keydown',e=>{if(e.key==='Escape'){$('reader').hidden=true;$('share').hidden=true}});
+document.querySelectorAll('.veil').forEach(v=>v.addEventListener('pointerdown',e=>{if(e.target===v)v.hidden=true}));
+
+// ---------- share card ----------
+function site(){const h=location.hostname;return location.protocol==='https:'&&h&&!/claude|localhost|127\.0\.0\.1|usercontent/.test(h)?h.replace(/^www\./,''):''}
+async function card(i,f){if(f)fmt=f;const o=S[i],r=R[i],wide=fmt==='169',W=wide?1600:1080,H=wide?900:1350,cv=document.createElement('canvas');cv.width=W;cv.height=H;const c=cv.getContext('2d');target=i;
+  const TY=lang==='hi'?'"Noto Sans Devanagari"':lang==='kn'?'"Noto Sans Kannada"':'"Courier Prime"',UI=lang==='en'?'"Instrument Sans"':TY,NUM='"Courier Prime"';
+  try{await Promise.all([[`700 40px ${TY}`,t('c1')],[`400 40px ${TY}`,t('c1')],[`500 40px ${UI}`,t('c_bank')],[`600 40px ${UI}`,t('c_month')],[`700 40px ${NUM}`,'₹0'],['700 40px Kalam','₹0']].map(x=>document.fonts.load(x[0],x[1])))}catch(e){}
+  const fit=(txt,font,size,max)=>{do{c.font=font.replace('$',size)}while(c.measureText(txt).width>max&&(size-=2)>14);return txt};
+  const mb=monthBoxes(r),cells=[];mb.boxes.forEach(b=>{for(let k=0;k<b.n;k++)cells.push(TINT[b.label])});
+  const boxes=(x,y,s,g)=>cells.forEach((col,k)=>{const bx=x+(k%15)*(s+g),by=y+Math.floor(k/15)*(s+g);
+    if(r.left<0&&k>=mb.funded){c.strokeStyle='#d42a3c';c.lineWidth=Math.max(3,s/12);c.strokeRect(bx+2,by+2,s-4,s-4);c.beginPath();c.moveTo(bx+6,by+s-6);c.lineTo(bx+s-6,by+6);c.stroke()}else{c.fillStyle=col;c.fillRect(bx,by,s,s)}});
+  const strike=(x,y,size)=>{c.font=`700 ${size}px ${NUM}`;c.fillStyle='#6b7588';const s0=inr(r.ctc);c.fillText(s0,x,y);const tw=c.measureText(s0).width;
+    c.strokeStyle='#d42a3c';c.lineWidth=size/9.5;c.lineCap='round';c.beginPath();c.moveTo(x-size*.2,y-size*.19);c.lineTo(x+tw+size*.2,y-size*.55);c.stroke()};
+  const foot=(x,y,max)=>{c.fillStyle='#6b7588';const w=site();c.fillText(fit(w?w+'  ·  '+t('c_foot').split('·').pop().trim():t('c_foot'),`700 $px ${w?NUM:TY}`,26,max),x,y)};
+  c.fillStyle='#16202c';c.fillRect(0,0,W,H);c.save();c.translate(W/2,H/2);c.rotate(wide?-.008:-.012);c.translate(-W/2,-H/2);
+  c.shadowColor='rgba(0,0,0,.45)';c.shadowBlur=50;c.shadowOffsetY=20;c.fillStyle='#fbfbf7';c.fillRect(wide?60:70,wide?55:70,W-(wide?120:140),H-(wide?110:140));c.shadowColor='transparent';
+  if(!wide){const x=130,M=W-260;
+    c.fillStyle='#1a2333';c.fillText(fit(o.name.toUpperCase(),`700 $px ${TY}`,34,M),x,160);c.fillRect(x,180,M,4);
+    c.fillText(fit(t('c1'),`400 $px ${TY}`,34,M),x,260);c.fillText(fit(t('c2'),`400 $px ${TY}`,34,M),x,308);
+    strike(x,430,96);c.fillStyle='#6b7588';c.fillText(fit(t('onpaper',{x:inr(r.ctc/12)}),`400 $px ${UI}`,30,M),x,482);
+    c.fillStyle='#d42a3c';c.save();c.translate(x,625);c.rotate(-.035);c.font='700 150px Kalam';c.fillText(inr(r.inHand),0,0);c.fillText(fit(t('c_bank'),`500 $px ${UI}`,40,M-20),6,66);c.restore();
+    c.fillStyle='#6b7588';c.fillText(fit(t('c_month')+'  ·  '+o.city.toUpperCase(),`600 $px ${UI}`,26,M),x,800);
+    boxes(x,825,48,7);
+    mb.boxes.forEach((b,k)=>{const kx=x+(k%2)*420,yy=985+Math.floor(k/2)*42;c.fillStyle=TINT[b.label];c.fillRect(kx,yy-22,24,24);c.fillStyle='#1a2333';c.fillText(fit(t('cat')[b.label]+'  '+inr(b.amount),`400 $px ${UI}`,28,370),kx+38,yy)});
+    c.fillStyle='#1a2333';c.fillRect(x,1125,M,4);c.fillStyle='#6b7588';c.fillText(fit(lang==='en'?t('left30').toUpperCase():t('left30'),`600 $px ${UI}`,26,380),x,1180);
+    c.font='700 92px Kalam';c.fillStyle=r.left<0?'#d42a3c':'#1a8a5c';c.textAlign='right';c.fillText(inr(r.left),W-130,1205);c.textAlign='left';foot(x,1252,M)}
+  else{const x=120,L=700,rx=880,RW=600;
+    c.fillStyle='#1a2333';c.fillText(fit(o.name.toUpperCase(),`700 $px ${TY}`,32,L),x,150);c.fillRect(x,168,W-240,4);
+    c.fillText(fit(t('c1')+' '+t('c2'),`400 $px ${TY}`,26,L),x,230);
+    strike(x,340,84);c.fillStyle='#6b7588';c.fillText(fit(t('onpaper',{x:inr(r.ctc/12)}),`400 $px ${UI}`,28,L),x,388);
+    c.fillStyle='#d42a3c';c.save();c.translate(x,540);c.rotate(-.03);c.font='700 136px Kalam';c.fillText(inr(r.inHand),0,0);c.fillText(fit(t('c_bank'),`500 $px ${UI}`,36,L-20),6,60);c.restore();
+    c.fillStyle='#6b7588';c.fillText(fit(t('c_month')+'  ·  '+o.city.toUpperCase(),`600 $px ${UI}`,22,RW),rx,240);
+    boxes(rx,262,34,6);
+    mb.boxes.forEach((b,k)=>{const kx=rx+(k%2)*300,yy=380+Math.floor(k/2)*36;c.fillStyle=TINT[b.label];c.fillRect(kx,yy-18,20,20);c.fillStyle='#1a2333';c.fillText(fit(t('cat')[b.label]+'  '+inr(b.amount),`400 $px ${UI}`,22,270),kx+30,yy)});
+    c.fillStyle='#1a2333';c.fillRect(rx,560,RW,3);c.fillStyle='#6b7588';c.fillText(fit(lang==='en'?t('left30').toUpperCase():t('left30'),`600 $px ${UI}`,22,300),rx,606);
+    c.font='700 84px Kalam';c.fillStyle=r.left<0?'#d42a3c':'#1a8a5c';c.textAlign='right';c.fillText(inr(r.left),rx+RW,630);c.textAlign='left';
+    if(r.left<0){c.fillStyle='#d42a3c';c.fillText(fit(t('runout',{d:r.runOutDay}),`500 $px ${UI}`,24,RW),rx,680)}
+    foot(x,790,W-240)}
+  c.restore();
+  shareText=t('s_text',{name:o.name,ctc:inr(r.ctc),inh:inr(r.inHand),city:o.city,left:inr(r.left)})+(site()?' '+location.href.split('#')[0]:'');
+  $('sh-img').src=cv.toDataURL('image/png');document.querySelectorAll('.fmt button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===fmt));$('share').hidden=false}
+document.querySelectorAll('.fmt button').forEach(b=>b.onclick=()=>card(target,b.dataset.f));
+$('sh-copy').onclick=async()=>{const b=$('sh-copy');try{await navigator.clipboard.writeText(shareText);b.textContent=t('copied')}catch(e){b.textContent=t('blocked')}setTimeout(()=>b.textContent=t('sh_c'),1600)};
+
+function start(data){let saved=data&&data.S?data:null;if(!saved)try{saved=JSON.parse(localStorage.getItem('ctc-reality-v3'))}catch(e){}
+  S=((saved&&Array.isArray(saved.S)&&saved.S.length===2)?saved.S:DEF).map((o,i)=>({...DEF[i],...o}));if(saved&&T[saved.lang])lang=saved.lang;
+  S.forEach(o=>{if(o.mode==='letter'&&!o.comp)o.mode='quick';if(!CITIES[o.city])o.city=DEF[0].city;o.flags=(o.flags||[]).filter(f=>f&&f.code)});render()}
+const hot=window.claude&&window.claude.hot;if(hot&&hot.snapshot)hot.snapshot(()=>({S,lang}));
+if(hot&&hot.ready)hot.ready(start);else start(hot&&hot.data||{});
+window.__ctc={get S(){return S},get R(){return R},get lang(){return lang}};
+})();
+
+</script>
+<script>if("serviceWorker" in navigator&&location.protocol==="https:"){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
+</body>
+</html>
